@@ -10,7 +10,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('saludo/<nombre>', pagina_inicio),
     path('', hora),
-    path('curso/<nombre>', guardarCurso),
+    path('curso/', guardarCurso),
     path("alumno/", alumno)
 ]
 

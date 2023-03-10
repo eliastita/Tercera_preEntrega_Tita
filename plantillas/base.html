@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Landing Page - Start Bootstrap Theme</title>
+        <title>Coder ejemplo</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="../AppCoder1/static/assets/favicon.ico" />
         <!-- Bootstrap icons-->
@@ -19,12 +19,16 @@
     <body>
         <!-- Navigation-->
         <nav class="navbar navbar-light bg-light static-top">
+
             <div class="container">
                 <a class="navbar-brand" href="#!">Practica coder</a>
                 <a class="btn btn-primary" href="#signup">Ingresar</a>
             </div>
         </nav>
         <!-- Masthead-->
+        {% block contenidoCambia %}
+         <h2>Probando esta nueva caracteristica</h2>
+        {% endblock %}
         <header class="masthead">
             <div class="container position-relative">
                 <div class="row justify-content-center">

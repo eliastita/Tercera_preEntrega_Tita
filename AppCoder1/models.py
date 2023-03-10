@@ -18,6 +18,8 @@ class Profesor(Persona):
 class Curso(models.Model):
     name = models.CharField(max_length=50)
     idc = models.IntegerField()
+    def __str__(self):
+        return f"Curso: {self.name}, Camada: {self.idc}"
 
 class Entregable(models.Model):
     nombre = models.CharField(max_length=50)

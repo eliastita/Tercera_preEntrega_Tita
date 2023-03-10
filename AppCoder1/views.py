@@ -1,24 +1,17 @@
-import random
 from datetime import datetime
 
 from django.shortcuts import render
-from django.http import HttpResponse
 
 from AppCoder1.models import Curso
 
-def guardarCurso(request, nombre):
-    curso = Curso(nombre="Java", numero=2)
-    curso.save()
-    contexto = {
-        "nombre" : nombre,
-        "numero" : random.randint(0,999)
-    }
-    return render(request, "curso.html",context= contexto)
+def guardarCurso(request):
+   # all_cursos = Curso.object.all()
+    return render(request, "AppCoder1/cursos.html")
 
 
 
 def alumno(request):
-    return render(request, "index.html")
+    return render(request, "base.html")
 
 
 def pagina_inicio(request, nombre):
