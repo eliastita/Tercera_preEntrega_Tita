@@ -10,9 +10,19 @@
     {% else %}
         <h4 style="background-color: #1c375e"> No hay cursos en el momento</h4>
     {% endif %}
+
+
     <form action="{% url 'AppCoder1Curso' %}" method="POST" >
     {% csrf_token %}
     {{ forms.as_table }}
     <input type="submit" value="Guardar">
     </form>
+
+    <form action="{% url 'AppCoderBusqCurso' %}" >
+        {{ formsBusqCamada.as_ul }}
+        <input type="submit" value="Buscar">
+
+    </form>
+
+
 {% endblock %}

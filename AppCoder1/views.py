@@ -1,10 +1,22 @@
 from django.http import HttpResponse
 from datetime import datetime
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-from AppCoder1.forms import CursoForm
+from AppCoder1.forms import CursoForm, BusqCursoForm
 from AppCoder1.models import Curso
+
+def busquedaNombreCurso(request):
+    mi_form = BusqCursoForm(request.GET)
+    if mi_form.is_valid():
+        informacion = mi_form.cleaned_data
+        cursos_filtrados= Curso.objects.filter(name__contains=informacion["name"])
+        contexto ={
+            "cursos":cursos_filtrados
+        }
+
+        return render(request, "AppCoder1/busquedaCursoNombre.html", context=contexto)
+
 
 def curso(request):
     if request.method == "POST":
@@ -17,7 +29,8 @@ def curso(request):
     all_cursos = Curso.objects.all()
     contexto = {
         "cursos":all_cursos,
-        "forms": CursoForm()
+        "forms": CursoForm(),
+        "formsBusqCamada":BusqCursoForm,
     }
     return render(request, "AppCoder1/cursos.html", context=contexto)
 
