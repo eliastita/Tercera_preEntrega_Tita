@@ -1,28 +1,39 @@
+from django.http import HttpResponse
 from datetime import datetime
 
 from django.shortcuts import render
 
+from AppCoder1.forms import CursoForm
 from AppCoder1.models import Curso
 
-def guardarCurso(request):
-   # all_cursos = Curso.object.all()
-    return render(request, "AppCoder1/cursos.html")
+def curso(request):
+    if request.method == "POST":
+        mi_form = CursoForm(request.POST)
+        if mi_form.is_valid():
+            informacion = mi_form.cleaned_data
+            curso_save = Curso(name=informacion["name"], idc=informacion["idc"])
+            curso_save.save()
+            return HttpResponse("Curso agregado.")
+    all_cursos = Curso.objects.all()
+    contexto = {
+        "cursos":all_cursos,
+        "forms": CursoForm()
+    }
+    return render(request, "AppCoder1/cursos.html", context=contexto)
 
-
-
-def alumno(request):
-    return render(request, "base.html")
-
-
-def pagina_inicio(request, nombre):
+def crearCurso(request, nombre, idc):
+    newcurso= Curso(name=nombre,idc= idc)
+    newcurso.save()
     contexto = {
         "nombre":nombre,
-        "guess":"Sofia"
+        "idc":idc,
     }
-    return render(request, "saludo.html", context= contexto)
+    return render(request,"AppCoder1/agregar.html", context=contexto)
 
-def hora(request):
-    contexto = {
-        "fecha" : datetime.now()
-    }
-    return render(request, "inicio.html", context=contexto)
+def alumno(request):
+    return render(request, "AppCoder1/alumno.html")
+
+def base_inicio (request):
+    return(render(request, "base.html"))
+
+

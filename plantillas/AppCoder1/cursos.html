@@ -1,5 +1,18 @@
-{% extends "base.html"  %}
+{% extends "AppCoder1/../base.html" %}
 
 {% block contenidoCambia %}
-    <h1>HOLA</h1>
+    <h1>HOLA cURSOS</h1>
+    {% if cursos %}
+        {% for curso in cursos %}
+            <p>Curso: {{ curso.name }}</p>
+            <p>Camada: {{ curso.idc }}</p>
+        {% endfor %}
+    {% else %}
+        <h4 style="background-color: #1c375e"> No hay cursos en el momento</h4>
+    {% endif %}
+    <form action="{% url 'AppCoder1Curso' %}" method="POST" >
+    {% csrf_token %}
+    {{ forms.as_table }}
+    <input type="submit" value="Guardar">
+    </form>
 {% endblock %}

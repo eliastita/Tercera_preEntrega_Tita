@@ -1,16 +1,15 @@
 from django.urls import path, include
 from AppCoder1 import views
 
-from AppCoder1.views import guardarCurso, alumno
-from AppCoder1.views import pagina_inicio, hora
+from AppCoder1.views import curso, alumno, base_inicio, crearCurso
 
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('saludo/<nombre>', pagina_inicio),
-    path('', hora),
-    path('curso/', guardarCurso),
-    path("alumno/", alumno)
+    path('', base_inicio, name="AppCoder1Base"),
+    path('curso/', curso, name="AppCoder1Curso"),
+    path("alumno/", alumno, name="AppCoder1Alumno"),
+    path("guardar/<nombre>/<idc>", crearCurso, name="AppCoder1Guardar")
 ]
 
