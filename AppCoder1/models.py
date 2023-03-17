@@ -1,12 +1,9 @@
 from django.db import models
 
-
-
-
 class Estudiante(models.Model):
-    apellido = models.CharField(max_length=50)
+    apellido = models.CharField(max_length=50, null=True)
     nombre = models.CharField(max_length=50)
-    email = models.EmailField()
+    email = models.EmailField(null=True)
     def __str__(self):
         return f"Profesor: {self.nombre} {self.apellido} {self.email}"
 
