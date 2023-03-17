@@ -4,7 +4,8 @@ from datetime import datetime
 from django.shortcuts import render, redirect
 
 from AppCoder1.forms import CursoForm, BusqCursoForm
-from AppCoder1.models import Curso
+from AppCoder1.models import Curso, Estudiante
+
 
 def busquedaNombreCurso(request):
     mi_form = BusqCursoForm(request.GET)
@@ -43,8 +44,12 @@ def crearCurso(request, nombre, idc):
     }
     return render(request,"AppCoder1/agregar.html", context=contexto)
 
-def alumno(request):
-    return render(request, "AppCoder1/alumno.html")
+def estudiante(request):
+    all_estudiante = Estudiante.objects.all()
+    contexto = {
+        "alumnos":all_estudiante
+    }
+    return render(request, "AppCoder1/estudiante.html", context=contexto)
 
 def base_inicio (request):
     return(render(request, "base.html"))

@@ -7,7 +7,8 @@ class Estudiante(models.Model):
     apellido = models.CharField(max_length=50)
     nombre = models.CharField(max_length=50)
     email = models.EmailField()
-
+    def __str__(self):
+        return f"Profesor: {self.nombre} {self.apellido} {self.email}"
 
 
 class Profesor(models.Model):
@@ -17,7 +18,7 @@ class Profesor(models.Model):
     email = models.EmailField()
 
     def __str__(self):
-        return f"Profesor: {self.nombre} {self.apellido}"
+        return f"Profesor: {self.nombre} {self.apellido} {self.profesion} {self.email}"
 
 class Curso(models.Model):
     name = models.CharField(max_length=50)

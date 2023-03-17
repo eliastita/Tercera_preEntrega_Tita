@@ -1,0 +1,18 @@
+{% extends "AppCoder1/../base.html" %}
+
+{% block contenidoCambia %}
+    <h1>Listado alumnos de la academia.</h1>
+    {% if alumnos %}
+        {% for alumno in alumnos %}
+
+            <p>{{ alumno }}</p>
+        {% endfor %}
+    {% else %}
+        <h4 style="background-color: #1c375e"> No hay alumnos cargados en este momento.</h4>
+    {% endif %}
+
+
+
+
+
+{% endblock %}
