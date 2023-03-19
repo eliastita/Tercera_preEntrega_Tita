@@ -11,3 +11,6 @@ class EstudianteForm(forms.Form):
     apellido = forms.CharField(max_length=50,)
     nombre = forms.CharField(max_length=50)
     email = forms.EmailField()
+
+class BusqEstudianteForm(forms.Form):
+    apellido = forms.CharField(min_length=2, max_length=50)

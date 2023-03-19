@@ -8,11 +8,20 @@
             <p>{{ alumno }}</p>
         {% endfor %}
     {% else %}
-        <h4 style="background-color: #1c375e"> No hay alumnos cargados en este momento.</h4>
+        <h4 style="background-color: #0a53be "> No hay alumnos cargados en este momento.</h4>
     {% endif %}
 
+ <form action="{% url 'AppCoder1Alumno' %}" method="POST" style="background-color: lightsteelblue" >
+    {% csrf_token %}
+    {{ formsEstudiante.as_table }}
+    <input type="submit" value="Guardar">
+    </form>
 
+    <form action="{% url 'AppCoder1BusqAlumno' %} " method="POST" style="background-color: lightsteelblue">
+        {% csrf_token %}
+        {{ formsBusqEst.as_table }}
+        <input type="submit" value="Buscar">
 
-
+    </form>
 
 {% endblock %}
