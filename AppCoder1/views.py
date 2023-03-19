@@ -3,8 +3,8 @@ from datetime import datetime
 
 from django.shortcuts import render, redirect
 
-from AppCoder1.forms import CursoForm, BusqCursoForm, EstudianteForm, BusqEstudianteForm
-from AppCoder1.models import Curso, Estudiante
+from AppCoder1.forms import CursoForm, BusqCursoForm, EstudianteForm, BusqEstudianteForm, ProfesorForm, BusqProfesorForm
+from AppCoder1.models import Curso, Estudiante, Profesor
 
 
 def busquedaNombreCurso(request):
@@ -63,7 +63,6 @@ def estudiante(request):
     }
     return render(request, "AppCoder1/estudiante.html", context=contexto)
 
-
 def busquedaApellidoEstudiante(request):
     if request.method == "POST":
         mi_form = BusqEstudianteForm(request.POST)
@@ -75,8 +74,35 @@ def busquedaApellidoEstudiante(request):
             }
             return render(request, "AppCoder1/busquedaEstudiante.html", context=contexto)
 
+def profesor(request):
+    if request.method == "POST":
+        mi_form = ProfesorForm(request.POST)
+        if mi_form.is_valid():
+            informacion = mi_form.cleaned_data
+            profesor_save = Profesor(profesion=informacion["profesion"],apellido=informacion["apellido"], nombre=informacion["nombre"],
+                                         email=informacion["email"])
+            profesor_save.save()
+            return HttpResponse("Profesor agregado.")
 
 
+    all_profesores = Profesor.objects.all()
+    contexto={
+        "profesores":all_profesores,
+        "formsProfesor":ProfesorForm,
+        "formsBusqProf":BusqProfesorForm
+    }
+    return render(request,"AppCoder1/profesor.html", context=contexto)
+
+def busquedaProfesionProfesor(request):
+    if request.method == "POST":
+        mi_form = BusqProfesorForm(request.POST)
+        if mi_form.is_valid():
+            info = mi_form.cleaned_data
+            profesor_filtrado = Profesor.objects.filter(profesion__icontains=info["profesion"])
+            contexto= {
+                "profesores":profesor_filtrado
+            }
+            return render(request, "AppCoder1/busquedaProfesor.html", context=contexto)
 
 def base_inicio(request):
     return (render(request, "base.html"))

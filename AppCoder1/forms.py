@@ -14,3 +14,13 @@ class EstudianteForm(forms.Form):
 
 class BusqEstudianteForm(forms.Form):
     apellido = forms.CharField(min_length=2, max_length=50)
+
+
+class ProfesorForm(forms.Form):
+    profesion = forms.CharField(max_length=20)
+    apellido = forms.CharField(max_length=50)
+    nombre = forms.CharField(max_length=50)
+    email = forms.EmailField()
+
+class BusqProfesorForm(forms.Form):
+    profesion = forms.CharField(min_length=2, max_length=50)

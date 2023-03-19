@@ -1,0 +1,33 @@
+{% extends "AppCoder1/../base.html" %}
+
+{% block contenidoCambia %}
+
+
+    <h1>Listado profesores de la academia:</h1>
+    {% if profesores %}
+        {% for profesor in profesores%}
+
+            <p>{{ profesor }}</p>
+        {% endfor %}
+    {% else %}
+        <h4 > No hay profesores cargados en este momento.</h4>
+    {% endif %}
+
+
+
+    <form action="{% url 'AppCoder1Profesor' %}" method="POST" style="background-color: lightsteelblue ">
+        {% csrf_token %}
+        {{ formsProfesor.as_table }}
+        <input type="submit" value="Guardar">
+        </form>
+
+
+
+    <form action="{% url 'AppCoder1BusqProfesion' %} " method="POST" style="background-color: lightsteelblue">
+        {% csrf_token %}
+        {{ formsBusqProf.as_table }}
+        <input type="submit" value="Buscar">
+
+    </form>
+{% endblock %}
+

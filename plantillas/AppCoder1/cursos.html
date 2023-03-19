@@ -8,17 +8,17 @@
             <p>Camada: {{ curso.idc }}</p>
         {% endfor %}
     {% else %}
-        <h4 style="background-color: #1c375e"> No hay cursos en el momento</h4>
+        <h4> No hay cursos en el momento</h4>
     {% endif %}
 
 
-    <form action="{% url 'AppCoder1Curso' %}" method="POST" >
+    <form action="{% url 'AppCoder1Curso' %}" method="POST" style="background-color: lightsteelblue" >
     {% csrf_token %}
     {{ forms.as_table }}
     <input type="submit" value="Guardar">
     </form>
 
-    <form action="{% url 'AppCoderBusqCurso' %}" >
+    <form action="{% url 'AppCoderBusqCurso' %}" style="background-color: lightsteelblue" >
         {{ formsBusqCamada.as_ul }}
         <input type="submit" value="Buscar">
 

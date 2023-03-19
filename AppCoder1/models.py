@@ -15,7 +15,7 @@ class Profesor(models.Model):
     email = models.EmailField()
 
     def __str__(self):
-        return f"Profesor: {self.nombre} {self.apellido} {self.profesion} {self.email}"
+        return f"Profesor: {self.nombre} {self.apellido} - Profesion: {self.profesion} - Email: {self.email}"
 
 class Curso(models.Model):
     name = models.CharField(max_length=50)
