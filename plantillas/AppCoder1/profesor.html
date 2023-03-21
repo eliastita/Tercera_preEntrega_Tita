@@ -2,7 +2,7 @@
 
 {% block contenidoCambia %}
 
-
+{# Mostrar listado #}
     <h1>Listado profesores de la academia:</h1>
     {% if profesores %}
         {% for profesor in profesores%}
@@ -14,7 +14,7 @@
     {% endif %}
 
 
-
+{# Crear en el listado #}
     <form action="{% url 'AppCoder1Profesor' %}" method="POST" style="background-color: lightsteelblue ">
         {% csrf_token %}
         {{ formsProfesor.as_table }}
@@ -22,7 +22,7 @@
         </form>
 
 
-
+{# Buscar en listado #}
     <form action="{% url 'AppCoder1BusqProfesion' %} " method="POST" style="background-color: lightsteelblue">
         {% csrf_token %}
         {{ formsBusqProf.as_table }}

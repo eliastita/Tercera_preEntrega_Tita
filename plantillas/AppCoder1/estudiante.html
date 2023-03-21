@@ -1,7 +1,9 @@
 {% extends "AppCoder1/../base.html" %}
 
 {% block contenidoCambia %}
-    <h1>Listado alumnos de la academia.</h1>
+
+{# Mostrar listado #}
+    <h1>Listado alumnos de la academia:</h1>
     {% if alumnos %}
         {% for alumno in alumnos %}
 
@@ -11,12 +13,15 @@
         <h4> No hay alumnos cargados en este momento.</h4>
     {% endif %}
 
+
+{# Crear en el listado #}
  <form action="{% url 'AppCoder1Alumno' %}" method="POST" style="background-color: lightsteelblue" >
     {% csrf_token %}
     {{ formsEstudiante.as_table }}
     <input type="submit" value="Guardar">
     </form>
 
+{# Buscar en el listado #}
     <form action="{% url 'AppCoder1BusqAlumno' %} " method="POST" style="background-color: lightsteelblue">
         {% csrf_token %}
         {{ formsBusqEst.as_table }}

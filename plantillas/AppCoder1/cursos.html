@@ -1,7 +1,9 @@
 {% extends "AppCoder1/../base.html" %}
 
 {% block contenidoCambia %}
-    <h1>HOLA cURSOS</h1>
+    <h1>Cursos de la academia:</h1>
+
+    {# Mostrar listado #}
     {% if cursos %}
         {% for curso in cursos %}
             <p>Curso: {{ curso.name }}</p>
@@ -11,13 +13,9 @@
         <h4> No hay cursos en el momento</h4>
     {% endif %}
 
+<button onclick="location.href= '{% url 'AppCoder1CrearCurso' %}' "  >Crear curso nuevo</button>
 
-    <form action="{% url 'AppCoder1Curso' %}" method="POST" style="background-color: lightsteelblue" >
-    {% csrf_token %}
-    {{ forms.as_table }}
-    <input type="submit" value="Guardar">
-    </form>
-
+    {# Buscar en el listado #}
     <form action="{% url 'AppCoderBusqCurso' %}" style="background-color: lightsteelblue" >
         {{ formsBusqCamada.as_ul }}
         <input type="submit" value="Buscar">

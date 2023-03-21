@@ -11,7 +11,7 @@ def busquedaNombreCurso(request):
     mi_form = BusqCursoForm(request.GET)
     if mi_form.is_valid():
         informacion = mi_form.cleaned_data
-        cursos_filtrados = Curso.objects.filter(name__contains=informacion["name"])
+        cursos_filtrados = Curso.objects.filter(name__contains=informacion["nombre"])
         contexto = {
             "cursos": cursos_filtrados
         }
@@ -19,23 +19,31 @@ def busquedaNombreCurso(request):
 
 
 def curso(request):
+
+    all_cursos = Curso.objects.all()
+    contexto = {
+        "cursos": all_cursos,
+        "formsBusqCamada": BusqCursoForm,
+
+    }
+    return render(request, "AppCoder1/cursos.html", context=contexto)
+
+def crearCurso(request):
     if request.method == "POST":
         mi_form = CursoForm(request.POST)
         if mi_form.is_valid():
             informacion = mi_form.cleaned_data
-            curso_save = Curso(name=informacion["name"], idc=informacion["idc"])
+            curso_save = Curso(name=informacion["nombre"], idc=informacion["camada"])
             curso_save.save()
-            return HttpResponse("Curso agregado.")
-    all_cursos = Curso.objects.all()
-    contexto = {
-        "cursos": all_cursos,
+            redirect("AppCoder1Curso")
+
+
+    contexto= {
         "forms": CursoForm(),
-        "formsBusqCamada": BusqCursoForm,
     }
-    return render(request, "AppCoder1/cursos.html", context=contexto)
+    return render(request, "AppCoder1/crearCurso.html", context=contexto)
 
-
-def crearCurso(request, nombre, idc):
+def crearCursoURL(request, nombre, idc):
     newcurso = Curso(name=nombre, idc=idc)
     newcurso.save()
     contexto = {
