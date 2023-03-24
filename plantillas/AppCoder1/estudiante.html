@@ -13,13 +13,9 @@
         <h4> No hay alumnos cargados en este momento.</h4>
     {% endif %}
 
+<button onclick="location.href= '{% url 'AppCoder1CrearAlumno' %}' "  >Guardar alumno nuevo</button>
 
-{# Crear en el listado #}
- <form action="{% url 'AppCoder1Alumno' %}" method="POST" style="background-color: lightsteelblue" >
-    {% csrf_token %}
-    {{ formsEstudiante.as_table }}
-    <input type="submit" value="Guardar">
-    </form>
+
 
 {# Buscar en el listado #}
     <form action="{% url 'AppCoder1BusqAlumno' %} " method="POST" style="background-color: lightsteelblue">

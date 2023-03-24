@@ -19,7 +19,6 @@ def busquedaNombreCurso(request):
 
 
 def curso(request):
-
     all_cursos = Curso.objects.all()
     contexto = {
         "cursos": all_cursos,
@@ -27,6 +26,7 @@ def curso(request):
 
     }
     return render(request, "AppCoder1/cursos.html", context=contexto)
+
 
 def crearCurso(request):
     if request.method == "POST":
@@ -37,11 +37,11 @@ def crearCurso(request):
             curso_save.save()
             redirect("AppCoder1Curso")
 
-
-    contexto= {
+    contexto = {
         "forms": CursoForm(),
     }
     return render(request, "AppCoder1/crearCurso.html", context=contexto)
+
 
 def crearCursoURL(request, nombre, idc):
     newcurso = Curso(name=nombre, idc=idc)
@@ -66,10 +66,27 @@ def estudiante(request):
     all_estudiante = Estudiante.objects.all()
     contexto = {
         "alumnos": all_estudiante,
-        "formsEstudiante":EstudianteForm(),
-        "formsBusqEst":BusqEstudianteForm
+        "formsEstudiante": EstudianteForm(),
+        "formsBusqEst": BusqEstudianteForm
     }
     return render(request, "AppCoder1/estudiante.html", context=contexto)
+
+
+def crearEstudiante(request):
+    if request.method == "POST":
+        mi_form = CursoForm(request.POST)
+        if mi_form.is_valid():
+            informacion = mi_form.cleaned_data
+            estudiante_save = Estudiante(apellido=informacion["apellido"], nombre=informacion["nombre"],
+                                         email=informacion["email"])
+            estudiante_save.save()
+            redirect("AppCoder1Alumno")
+
+    contexto = {
+        "forms": EstudianteForm(),
+    }
+    return render(request, "AppCoder1/crearEstudiante.html", context=contexto)
+
 
 def busquedaApellidoEstudiante(request):
     if request.method == "POST":
@@ -77,29 +94,48 @@ def busquedaApellidoEstudiante(request):
         if mi_form.is_valid():
             info = mi_form.cleaned_data
             estudiantes_filtrados = Estudiante.objects.filter(apellido__contains=info["apellido"])
-            contexto= {
-                "estudiantes":estudiantes_filtrados
+            contexto = {
+                "estudiantes": estudiantes_filtrados
             }
             return render(request, "AppCoder1/busquedaEstudiante.html", context=contexto)
+
 
 def profesor(request):
     if request.method == "POST":
         mi_form = ProfesorForm(request.POST)
         if mi_form.is_valid():
             informacion = mi_form.cleaned_data
-            profesor_save = Profesor(profesion=informacion["profesion"],apellido=informacion["apellido"], nombre=informacion["nombre"],
-                                         email=informacion["email"])
+            profesor_save = Profesor(profesion=informacion["profesion"], apellido=informacion["apellido"],
+                                     nombre=informacion["nombre"],
+                                     email=informacion["email"])
             profesor_save.save()
             return HttpResponse("Profesor agregado.")
 
-
     all_profesores = Profesor.objects.all()
-    contexto={
-        "profesores":all_profesores,
-        "formsProfesor":ProfesorForm,
-        "formsBusqProf":BusqProfesorForm
+    contexto = {
+        "profesores": all_profesores,
+        "formsProfesor": ProfesorForm,
+        "formsBusqProf": BusqProfesorForm
     }
-    return render(request,"AppCoder1/profesor.html", context=contexto)
+    return render(request, "AppCoder1/profesor.html", context=contexto)
+
+
+def crearProfesor(request):
+    if request.method == "POST":
+        mi_form = CursoForm(request.POST)
+        if mi_form.is_valid():
+            informacion = mi_form.cleaned_data
+            profesor_save = Profesor(profesion=informacion["profesion"], apellido=informacion["apellido"],
+                                     nombre=informacion["nombre"],
+                                     email=informacion["email"])
+            profesor_save.save()
+            redirect("AppCoder1Profesor")
+
+    contexto = {
+        "forms": ProfesorForm(),
+    }
+    return render(request, "AppCoder1/crearProfesor.html", context=contexto)
+
 
 def busquedaProfesionProfesor(request):
     if request.method == "POST":
@@ -107,10 +143,11 @@ def busquedaProfesionProfesor(request):
         if mi_form.is_valid():
             info = mi_form.cleaned_data
             profesor_filtrado = Profesor.objects.filter(profesion__icontains=info["profesion"])
-            contexto= {
-                "profesores":profesor_filtrado
+            contexto = {
+                "profesores": profesor_filtrado
             }
             return render(request, "AppCoder1/busquedaProfesor.html", context=contexto)
+
 
 def base_inicio(request):
     return (render(request, "base.html"))

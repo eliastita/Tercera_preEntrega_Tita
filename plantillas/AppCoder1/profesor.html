@@ -13,13 +13,7 @@
         <h4 > No hay profesores cargados en este momento.</h4>
     {% endif %}
 
-
-{# Crear en el listado #}
-    <form action="{% url 'AppCoder1Profesor' %}" method="POST" style="background-color: lightsteelblue ">
-        {% csrf_token %}
-        {{ formsProfesor.as_table }}
-        <input type="submit" value="Guardar">
-        </form>
+<button onclick="location.href= '{% url 'AppCoder1CrearProfesor' %}' "  >Guardar profesor nuevo</button>
 
 
 {# Buscar en listado #}

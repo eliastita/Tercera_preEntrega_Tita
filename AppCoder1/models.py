@@ -5,7 +5,7 @@ class Estudiante(models.Model):
     nombre = models.CharField(max_length=50)
     email = models.EmailField(null=True)
     def __str__(self):
-        return f"Estudiante: {self.nombre} {self.apellido} {self.email}"
+        return f"Estudiante: {self.nombre} {self.apellido} Email: {self.email}"
 
 
 class Profesor(models.Model):

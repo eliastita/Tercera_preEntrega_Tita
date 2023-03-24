@@ -3,12 +3,11 @@
 {% block contenidoCambia %}
 
 
-{# Guardar en el listado #}
-    <form action="{% url 'AppCoder1Curso' %}" method="POST" style="background-color: lightsteelblue" >
+{# Crear en el listado #}
+ <form action="{% url 'AppCoder1Alumno' %}" method="POST" style="background-color: lightsteelblue" >
     {% csrf_token %}
     {{ forms.as_table }}
     <input type="submit" value="Guardar">
     </form>
-    
 
 {% endblock %}
