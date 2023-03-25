@@ -7,7 +7,7 @@
     {% if alumnos %}
         {% for alumno in alumnos %}
 
-            <p>{{ alumno }}</p>
+            <p> {{ alumno }} <a href=" {% url 'AppCoder1EliminarEstudiante' alumno.apellido %} ">Eliminar</a></p>
         {% endfor %}
     {% else %}
         <h4> No hay alumnos cargados en este momento.</h4>

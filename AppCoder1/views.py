@@ -23,7 +23,6 @@ def curso(request):
     contexto = {
         "cursos": all_cursos,
         "formsBusqCamada": BusqCursoForm,
-
     }
     return render(request, "AppCoder1/cursos.html", context=contexto)
 
@@ -35,12 +34,18 @@ def crearCurso(request):
             informacion = mi_form.cleaned_data
             curso_save = Curso(name=informacion["nombre"], idc=informacion["camada"])
             curso_save.save()
-            redirect("AppCoder1Curso")
+            return redirect("AppCoder1Curso")
 
     contexto = {
         "forms": CursoForm(),
     }
     return render(request, "AppCoder1/crearCurso.html", context=contexto)
+
+
+def eliminarCurso(request, camada):
+    get_curso = Curso.objects.get(idc=camada)
+    get_curso.delete()
+    return redirect("AppCoder1Curso")
 
 
 def crearCursoURL(request, nombre, idc):
@@ -54,15 +59,6 @@ def crearCursoURL(request, nombre, idc):
 
 
 def estudiante(request):
-    if request.method == "POST":
-        mi_form = EstudianteForm(request.POST)
-        if mi_form.is_valid():
-            informacion = mi_form.cleaned_data
-            estudiante_save = Estudiante(apellido=informacion["apellido"], nombre=informacion["nombre"],
-                                         email=informacion["email"])
-            estudiante_save.save()
-            return HttpResponse("Estudiante agregado.")
-
     all_estudiante = Estudiante.objects.all()
     contexto = {
         "alumnos": all_estudiante,
@@ -80,7 +76,7 @@ def crearEstudiante(request):
             estudiante_save = Estudiante(apellido=informacion["apellido"], nombre=informacion["nombre"],
                                          email=informacion["email"])
             estudiante_save.save()
-            redirect("AppCoder1Alumno")
+            return redirect("AppCoder1Alumno")
 
     contexto = {
         "forms": EstudianteForm(),
@@ -100,17 +96,13 @@ def busquedaApellidoEstudiante(request):
             return render(request, "AppCoder1/busquedaEstudiante.html", context=contexto)
 
 
-def profesor(request):
-    if request.method == "POST":
-        mi_form = ProfesorForm(request.POST)
-        if mi_form.is_valid():
-            informacion = mi_form.cleaned_data
-            profesor_save = Profesor(profesion=informacion["profesion"], apellido=informacion["apellido"],
-                                     nombre=informacion["nombre"],
-                                     email=informacion["email"])
-            profesor_save.save()
-            return HttpResponse("Profesor agregado.")
+def eliminarEstudiante(request, apellido):
+    get_estudiante = Estudiante.objects.get(apellido= apellido)
+    get_estudiante.delete()
+    return redirect("AppCoder1Alumno")
 
+
+def profesor(request):
     all_profesores = Profesor.objects.all()
     contexto = {
         "profesores": all_profesores,
@@ -129,7 +121,7 @@ def crearProfesor(request):
                                      nombre=informacion["nombre"],
                                      email=informacion["email"])
             profesor_save.save()
-            redirect("AppCoder1Profesor")
+            return redirect("AppCoder1Profesor")
 
     contexto = {
         "forms": ProfesorForm(),
@@ -148,6 +140,10 @@ def busquedaProfesionProfesor(request):
             }
             return render(request, "AppCoder1/busquedaProfesor.html", context=contexto)
 
+def eliminarProfesor(request, apellido):
+    get_profesor = Profesor.objects.get(apellido= apellido)
+    get_profesor.delete()
+    return redirect("AppCoder1Profesor")
 
 def base_inicio(request):
     return (render(request, "base.html"))

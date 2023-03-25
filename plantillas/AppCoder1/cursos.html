@@ -3,11 +3,10 @@
 {% block contenidoCambia %}
     <h1>Cursos de la academia:</h1>
 
-    {# Mostrar listado #}
+    {# Mostrar listado y eliminar a su lado#}
     {% if cursos %}
         {% for curso in cursos %}
-            <p>Curso: {{ curso.name }}</p>
-            <p>Camada: {{ curso.idc }}</p>
+            <p> {{ curso }} <a href=" {% url 'AppCoder1EliminarCurso' curso.idc %} ">Eliminar</a></p>
         {% endfor %}
     {% else %}
         <h4> No hay cursos en el momento</h4>
@@ -17,7 +16,7 @@
 
     {# Buscar en el listado #}
     <form action="{% url 'AppCoderBusqCurso' %}" style="background-color: lightsteelblue" >
-        {{ formsBusqCamada.as_ul }}
+        {{ formsBusqCamada.as_table }}
         <input type="submit" value="Buscar">
 
     </form>
