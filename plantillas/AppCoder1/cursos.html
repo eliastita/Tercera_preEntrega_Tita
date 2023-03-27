@@ -6,7 +6,11 @@
     {# Mostrar listado y eliminar a su lado#}
     {% if cursos %}
         {% for curso in cursos %}
-            <p> {{ curso }} <a href=" {% url 'AppCoder1EliminarCurso' curso.idc %} ">Eliminar</a></p>
+            <p>
+                {{ curso }}
+                <a href=" {% url 'AppCoder1EliminarCurso' curso.idc %} ">Eliminar</a>
+                <a href=" {% url 'AppCoder1EditarCurso' curso.idc %} ">Editar</a>
+            </p>
         {% endfor %}
     {% else %}
         <h4> No hay cursos en el momento</h4>

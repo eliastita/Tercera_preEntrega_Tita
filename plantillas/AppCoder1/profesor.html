@@ -7,7 +7,11 @@
     {% if profesores %}
         {% for profesor in profesores%}
 
-            <p> {{ profesor }} <a href=" {% url 'AppCoder1EliminarProfesor' profesor.apellido %} ">Eliminar</a></p>
+            <p> {{ profesor }}
+                <a href=" {% url 'AppCoder1EliminarProfesor' profesor.apellido %} ">Eliminar</a>
+                <a href=" {% url 'AppCoder1EditarProfesor' profesor.apellido %} ">Editar</a>
+
+            </p>
         {% endfor %}
     {% else %}
         <h4 > No hay profesores cargados en este momento.</h4>
